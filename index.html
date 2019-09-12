@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>Interplanetar.io</title>
+		<style>
+			body { margin: 0; overflow: hidden}
+			canvas {
+				border: solid black 1px;
+			}
+		</style>
+	</head>
+	<body oncontextmenu="return false;">
+		<canvas id="canvas"></canvas>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="javascripts/helper.js"></script>
+		<script src="javascripts/vector.js"></script>
+		<script src="javascripts/perlin.js"></script>
+		<script src="javascripts/Rocket.js"></script>
+		<script src="javascripts/Planet.js"></script>
+		<script src="javascripts/Star.js"></script>
+		<script src="javascripts/Stats.js"></script>
+		<script src="javascripts/draw.js"></script>
+		<script>
+			// Setup canvas
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			canvas.width = $(document).innerWidth();
+			canvas.height = $(document).innerHeight();
+
+			noise.seed(Math.random()); // Random terrain
+
+			$(window).resize(function () {
+		        canvas.width = window.innerWidth;
+		        canvas.height = window.innerHeight;
+		    })
+
+		    function inScreen(pos, relative) {
+		    	var relative = relative || 1;
+		    	var pos = Vector.mult(pos, display.zoom);
+		    	var rocketPos = Vector.mult(rocket.pos, display.zoom / relative);
+
+		    	return pos.x > rocketPos.x - canvas.width/2 && pos.x < rocketPos.x + canvas.width/2 && pos.y > rocketPos.y - canvas.height/2 && pos.y < rocketPos.y + canvas.height/2;
+		    }
+
+		    // Initialize objects
+
+		    let display = {
+		    	zoom: 1,
+		    	smoothZoom: [],
+		    	smooth: true,
+		    	minZoom: 0.5,
+		    	maxZoom: 1.5
+		    }
+
+		    let rocket, planets, stars;
+
+		    let stats;
+
+			// Create smoke image
+			var smoke = new Image();
+			smoke.src = "http://www.blog.jonnycornwell.com/wp-content/uploads/2012/07/Smoke10.png";
+
+
+		    function setup() {
+		    	rocket = new Rocket(0, -100, 23000, 10, 30);
+
+		    	let earthRadius = 200;
+		    	let massMultiplier = 1000;
+
+			    planets = [new Planet(0, earthRadius+rocket.height/2, earthRadius * massMultiplier, earthRadius, "Earth", "#0d7d93", "green")];
+
+			    for (var i = 0; i < 5; i++) {
+			    	let radius = randInt(100, 300);
+			    	planets.push(
+			    		new Planet(randInt(-5000, 5000), randInt(-1000, 1000) + -(i+1) * 5000, radius * massMultiplier, radius, "Planet"+i, getRandomColor())
+			    	);
+			    }
+
+			    stars = [];
+
+			    for (var i = 0; i < 30000; i++) {
+			    	stars.push(new Star(10000, 10000));
+			    }
+
+			    stats = [];
+			    stats.push(new Stats("FPS", fpsArray, false, 2))
+			    stats.push(new Stats("Position", rocket.pos))
+			    stats.push(new Stats("Velocity", rocket.vel))
+			    stats.push(new Stats("Speed", rocket, "speed"))
+			    stats.push(new Stats("Thrust", rocket, "thrust"))
+			    stats.push(new Stats("G-Force", rocket, "gForce", 2))
+			    stats.push(new Stats("Zoom", display, "zoom", 2));
+		    }
+
+		    // Functions
+
+		    function updateZoom(rocket) {
+		    	if (display.smooth) {
+		    		//display.smoothZoom.unshift(1.5 - (Math.max(0, rocket.speed))/rocket.maxSpeed); // Speed based zoom
+		    		display.smoothZoom.unshift(1.5 - (rocket.closestPlanetDistance)/200); // Distance based zoom
+
+					display.smoothZoom.length = 100; // Smoothness of zoom transition
+					display.zoom = Math.max(0.5, display.smoothZoom.reduce((a, b) => a + b, 0)/display.smoothZoom.length);
+		    	}
+		    }
+
+			function update() {
+				rocket.update(); // Update rocket
+
+				updateZoom(rocket); // Update zoom based on rocket speed
+			}
+
+			function draw() {
+				ctx.save();
+				ctx.translate(canvas.width/2 - rocket.pos.x, canvas.height/2 - rocket.pos.y);
+
+				drawSpace();
+
+				for (let s of stars) { // Draw stars
+					s.display();
+				}
+
+				for (let p of planets) {
+					p.display();
+					p.drawMarker();
+				}
+
+				rocket.display();
+
+				ctx.restore();
+
+				drawStats();
+				drawDashboard();
+			}
+
+			// Keyboard events
+
+			var map = {};
+			onkeydown = onkeyup = function(e){
+			    e = e || event; 
+			    map[e.keyCode] = e.type == 'keydown';
+			}
+
+			// Scroll event
+			var scrollSpeed = 0.01;
+			$(window).bind('mousewheel', function(event) {
+				if (event.originalEvent.wheelDelta >= 0 && display.zoom < display.maxZoom) {
+			        display.zoom += display.zoom/8;
+			    } else if (event.originalEvent.wheelDelta <= 0 && display.zoom > display.minZoom) {
+			        display.zoom -= display.zoom/8;
+			    }
+			});
+
+			var mouse = new Vector();
+			$("#canvas").on("mousemove", function (e) {
+				mouse.x = e.offsetX;
+				mouse.y = e.offsetY;
+			})
+
+
+			// Game loop
+
+	        var fps = 1000;
+	        var now;
+	        var then = Date.now();
+	        var interval = 1000/fps;
+	        var delta;
+	        var fpsArray = [];
+	        var averageArray;
+
+		    function loop(showFPS, callback) {
+		        requestAnimationFrame(loop);
+		           
+		        now = Date.now();
+		        delta = now - then;
+		           
+		        if (delta > interval) {
+		            then = now - (delta % interval);
+
+		            ctx.clearRect(0, 0, canvas.width, canvas.height);
+		            update();
+		            draw();
+
+	            	// Get average frames per second with a 30 frame buffer
+		              
+		            fpsArray.push(1000/delta);
+		            if (fpsArray.length > 30) {
+		                fpsArray.shift();
+		            }
+		        }
+		    }
+
+		    // Run
+		    setup();
+		    loop();
+		</script>
+	</body>
+</html>
