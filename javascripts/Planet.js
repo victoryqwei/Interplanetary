@@ -10,18 +10,20 @@ class Planet {
 	}
 
 	display() {
-		let zoom = display.zoom;
-		ctx.save();
-		ctx.translate(-rocket.pos.x*zoom + canvas.width/2 , -rocket.pos.y*zoom + canvas.height/2);
-		let options = {
-			outline: true,
-			outlineWidth: 10,
-			outlineColor: this.strokeColor, 
-			glow: true,
-			glowColor: this.color
+		if (inScreen(this.pos, false, this.radius + 100)) {
+			let zoom = display.zoom;
+			ctx.save();
+			ctx.translate(-rocket.pos.x*zoom + canvas.width/2 , -rocket.pos.y*zoom + canvas.height/2);
+			let options = {
+				outline: true,
+				outlineWidth: 10,
+				outlineColor: this.strokeColor, 
+				glow: true,
+				glowColor: this.color
+			}
+			drawCircle(this.pos.x*zoom, this.pos.y*zoom , this.radius*zoom, this.color, options);
+			ctx.restore();
 		}
-		drawCircle(this.pos.x*zoom, this.pos.y*zoom , this.radius*zoom, this.color, options);
-		ctx.restore();
 	}
 
 	drawMarker() {

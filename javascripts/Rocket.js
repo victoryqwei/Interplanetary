@@ -14,9 +14,7 @@ class Rocket {
 
 		// Forces
 		this.thrust = 0;
-
 		this.steer = 0;
-
 		this.gForce = 0; // Gravitational pull
 
 		// Fuel
@@ -36,6 +34,8 @@ class Rocket {
 
 		this.particlesMax = 200;
 		this.particles = [];
+
+
 	}
 
 	setConfig(cfg) {
@@ -45,6 +45,7 @@ class Rocket {
 		this.width = cfg.width || 20;
 
 		this.maxSpeed = cfg.maxSpeed || Infinity;
+		this.landingSpeed = cfg.landingSpeed || 250;
 
 		this.mass = cfg.mass || 100;
 		this.maxThrust = cfg.maxThrust || 500;
@@ -158,7 +159,7 @@ class Rocket {
 			rocketHeading.mult(-this.height/2);
 			thrusterPos.add(rocketHeading);
 
-			for (var i = 0; i < 5; i++) {
+			for (var i = 0; i < 10; i++) {
 				let smokeOffset = this.width;
 				let smokeParticle = new Vector(
 					thrusterPos.x+random(smokeOffset, -smokeOffset), 
@@ -200,7 +201,7 @@ class Rocket {
 					this.pos.y += displacement.y;
 				}
 
-				if (this.speed > 300 || !goodLanding) { // High velocity or wrong landing
+				if (this.speed > this.landingSpeed || !goodLanding) { // High velocity or wrong landing
 					this.crashed = true;
 				} else { // Start refueling the rocket
 					this.fuel = constrain(this.fuel + delta * 10, 0, this.maxFuel);
@@ -219,7 +220,7 @@ class Rocket {
 
 	drawParticles() {
 		let zoom = display.zoom;
-		let size = this.width*2;
+		let size = this.width*1.5;
 		let smokeDuration = 1000;
 		for (let i = 0; i < this.particles.length; i++) {
 			let p = this.particles[i];

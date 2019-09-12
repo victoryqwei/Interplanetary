@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset=utf-8>
-		<title>Interplanetar.io</title>
+		<title>Interplanetary</title>
 		<style>
 			body { margin: 0; overflow: hidden}
 			canvas {
@@ -36,12 +36,13 @@
 		        canvas.height = window.innerHeight;
 		    })
 
-		    function inScreen(pos, relative) {
+		    function inScreen(pos, relative, r) {
 		    	var relative = relative || 1;
 		    	var pos = Vector.mult(pos, display.zoom);
+		    	let radius = (r || 0) * display.zoom;
 		    	var rocketPos = Vector.mult(rocket.pos, display.zoom / relative);
 
-		    	return pos.x > rocketPos.x - canvas.width/2 && pos.x < rocketPos.x + canvas.width/2 && pos.y > rocketPos.y - canvas.height/2 && pos.y < rocketPos.y + canvas.height/2;
+		    	return pos.x > rocketPos.x - canvas.width/2 - radius && pos.x < rocketPos.x + canvas.width/2 + radius && pos.y > rocketPos.y - canvas.height/2 - radius && pos.y < rocketPos.y + canvas.height/2 + radius;
 		    }
 
 		    // Initialize objects
@@ -50,8 +51,8 @@
 		    	zoom: 1,
 		    	smoothZoom: [],
 		    	smooth: true,
-		    	minZoom: 0.5,
-		    	maxZoom: 1.5
+		    	minZoom: 0.1,
+		    	maxZoom: 2
 		    }
 
 		    let rocket, planets, stars;
@@ -99,7 +100,7 @@
 		    function updateZoom(rocket) {
 		    	if (display.smooth) {
 		    		//display.smoothZoom.unshift(1.5 - (Math.max(0, rocket.speed))/rocket.maxSpeed); // Speed based zoom
-		    		display.smoothZoom.unshift(1.5 - (rocket.closestPlanetDistance)/200); // Distance based zoom
+		    		display.smoothZoom.unshift(display.maxZoom - (rocket.closestPlanetDistance)/200); // Distance based zoom
 
 					display.smoothZoom.length = 100; // Smoothness of zoom transition
 					display.zoom = Math.max(0.5, display.smoothZoom.reduce((a, b) => a + b, 0)/display.smoothZoom.length);
