@@ -129,6 +129,13 @@ function randInt(min, max) {
 	return Math.round(Math.random() * (max - min) + min);
 }
 
+function randn_bm() {
+    var u = 0, v = 0;
+    while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+    while(v === 0) v = Math.random();
+    return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+}
+
 function dist(a, b) {
 	return Math.sqrt(Math.pow(a.x-b.x, 2) + Math.pow(a.y-b.y, 2));
 }
@@ -229,6 +236,14 @@ function getDistance( fromX, fromY, toX, toY ) {
 	var dY = Math.abs( fromY - toY );
 
 	return Math.sqrt( ( dX * dX ) + ( dY * dY ) );
+}
+
+// Get screen pos
+
+function getScreenPos(absolutePos, zoom) {
+	return new Vector(
+		absolutePos.x*zoom - rocket.pos.x*zoom + canvas.width/2, 
+		absolutePos.y*zoom - rocket.pos.y*zoom + canvas.height/2);
 }
 
 // Game loop helper

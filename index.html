@@ -19,9 +19,11 @@
 		<script src="javascripts/perlin.js"></script>
 		<script src="javascripts/Rocket.js"></script>
 		<script src="javascripts/Planet.js"></script>
+		<script src="javascripts/Resource.js"></script>
 		<script src="javascripts/Star.js"></script>
 		<script src="javascripts/Stats.js"></script>
 		<script src="javascripts/draw.js"></script>
+		<script src="javascripts/interface.js"></script>
 		<script>
 			// Setup canvas
 			var canvas = document.getElementById("canvas");
@@ -46,42 +48,63 @@
 		    }
 
 		    // Initialize objects
-
 		    let display = {
+		    	advanced: false,
 		    	zoom: 1,
 		    	smoothZoom: [],
 		    	smooth: true,
 		    	minZoom: 0.1,
-		    	maxZoom: 2
+		    	maxZoom: 2.5
 		    }
 
 		    let rocket, planets, stars;
 
 		    let stats;
 
-			// Create smoke image
+			// Create smoke image+
 			var smoke = new Image();
-			smoke.src = "http://www.blog.jonnycornwell.com/wp-content/uploads/2012/07/Smoke10.png";
+			smoke.src = "https://www.blog.jonnycornwell.com/wp-content/uploads/2012/07/Smoke10.png";
 
 
 		    function setup() {
-		    	rocket = new Rocket(0, -100, 23000, 10, 30);
 
+		    	var solarSystem = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"];
+		    	var planetNames = ["Rephecarro", "Sophebos", "Lulmaonerth", "Zastruelea", "Ocroalea", "Gisadus", "Pandomia", "Duthilles", "Xechinda", "Kealia", "Luilia", "Buicarro", "Drekatania", "Cruutis", "Biewei", "Ciea 8F6E", "Noth WC3T", "Drorth 2I", "Treron M1V9", "Theshan LIXD", "Crora C809", "Theon 592", "Mides A61T", "Wei's Planet", "Kanus Maximus", "Mayan 889"];
+
+		    	rocket = new Rocket(0, 0, 23000, 10, 30);
+
+		    	//Create Earth
 		    	let earthRadius = 200;
 		    	let massMultiplier = 1000;
+			    planets = [new Planet(0, earthRadius+rocket.height/2, earthRadius * massMultiplier, earthRadius, "Planet", new Resource("Iron"), "Earth", "#0d7d93", "green")];
+			   
 
-			    planets = [new Planet(0, earthRadius+rocket.height/2, earthRadius * massMultiplier, earthRadius, "Earth", "#0d7d93", "green")];
-
-			    for (var i = 0; i < 5; i++) {
+			    
+			    for (var i = 0; i < 20; i++) {
 			    	let radius = randInt(100, 300);
+
+			    	//Create planets
+			    	// 
 			    	planets.push(
-			    		new Planet(randInt(-5000, 5000), randInt(-1000, 1000) + -(i+1) * 5000, radius * massMultiplier, radius, "Planet"+i, getRandomColor())
+			    		new Planet(randInt(-5000, 5000), randInt(-2000, 2000) + -(i+1) * 5000, radius * massMultiplier, radius, "Planet", new Resource(), planetNames[randInt(0, planetNames.length)], getRandomColor())
 			    	);
+
+
+			    	if (planets[i].name == "Kanus Maximus") {
+			    		planets[i].radius = 1000;
+			    		planets[i].mass = 10000000;
+			    	}
 			    }
+
+			    //Create black hole
+			    for (let i = 0; i < 40; i++) {
+			    	planets.push(new Planet(randInt(-5000, 5000), randInt(-2000, 2000)+ -(i+1) * 5000, 5000000, 75, "Black Hole", new Resource(), "Black Hole", "#000000", "black"));
+			    }
+				
 
 			    stars = [];
 
-			    for (var i = 0; i < 30000; i++) {
+			    for (var i = 0; i < 5000; i++) {
 			    	stars.push(new Star(10000, 10000));
 			    }
 
@@ -93,6 +116,8 @@
 			    stats.push(new Stats("Thrust", rocket, "thrust"))
 			    stats.push(new Stats("G-Force", rocket, "gForce", 2))
 			    stats.push(new Stats("Zoom", display, "zoom", 2));
+			    stats.push(new Stats("Angular Velocity", rocket, "angularVelocity", 2));
+			    stats.push(new Stats("Angle from Planet", rocket, "angleFromPlanet", 2));
 		    }
 
 		    // Functions
@@ -132,8 +157,12 @@
 
 				ctx.restore();
 
-				drawStats();
 				drawDashboard();
+				drawInterface();
+
+				if(display.advanced) {
+					drawStats();
+				}
 			}
 
 			// Keyboard events

@@ -1,19 +1,23 @@
 class Planet {
-	constructor(x, y, mass, radius, name = "Planet", color = "#c1440e", strokeColor) {
+	constructor(x, y, mass, radius, type, resource, name = "Planet", color = "#c1440e", strokeColor) {
 		this.pos = new Vector(x, y);
 		this.mass = mass;
 		this.radius = radius;
 		this.name = name;
+		this.type = type;
+		this.resource = resource;
 		
 		this.color = color;
 		this.strokeColor = strokeColor || pSBC(-0.2, this.color, false, true);
+
+		this.escapeThrust = round((this.mass*rocket.mass)/Math.pow(this.radius+rocket.height/2, 2));
 	}
 
 	display() {
 		if (inScreen(this.pos, false, this.radius + 100)) {
 			let zoom = display.zoom;
 			ctx.save();
-			ctx.translate(-rocket.pos.x*zoom + canvas.width/2 , -rocket.pos.y*zoom + canvas.height/2);
+
 			let options = {
 				outline: true,
 				outlineWidth: 10,
@@ -21,7 +25,25 @@ class Planet {
 				glow: true,
 				glowColor: this.color
 			}
-			drawCircle(this.pos.x*zoom, this.pos.y*zoom , this.radius*zoom, this.color, options);
+
+			var screenPos = getScreenPos(this.pos, zoom);
+
+			//Draw Planet
+			if(this.type == "Planet") {
+				drawCircle(screenPos.x, screenPos.y, this.radius*zoom, this.color, options);
+			} else if(this.type == "Black Hole") {
+				drawCircle(screenPos.x, screenPos.y, this.radius*zoom, this.color, options);
+
+				let horizonDistance = getDistance(screenPos.x - rocket.pos.x*zoom + canvas.width/2,
+				screenPos.y - rocket.pos.y*zoom + canvas.height/2, canvas.width/2, canvas.height/2);
+
+				//Event horizon
+				if(horizonDistance >= this.radius*1.5*zoom) {
+					drawCircle(screenPos.x, screenPos.y, this.radius*1.5*zoom, this.color, options);
+				} else {
+					drawCircle(screenPos.x, screenPos.y, (canvas.width*4 - canvas.width*4*(horizonDistance/(200*zoom))), this.color, options);
+				}
+			}
 			ctx.restore();
 		}
 	}
@@ -34,9 +56,7 @@ class Planet {
 		let pos = Vector.mult(this.pos, zoom);
 
 		let distance = dist(this.pos, rocket.pos) - this.radius - rocket.height/2;
-		if (inScreen(this.pos)) {
-			drawText(Math.round(distance) + "km", pos.x - rocketPos.x + canvas.width/2, pos.y - rocketPos.y + canvas.height/2, "40px Arial", "white", "center", "middle");
-		} else {
+		if (!inScreen(this.pos) && distance < 10000) {
 			let xPos, yPos;
 
 			let screenX, screenY;
@@ -94,8 +114,7 @@ class Planet {
 				outlineWidth: 3
 			}
 			drawCircle(xPos, yPos, markerRadius, this.color, options)
-			if (distance < 8000)
-				drawText(Math.round(distance) + "km", xPos + offX, yPos + offY, "20px Arial", "white", textOffset, vOffset);
+			drawText(Math.round(distance) + "km", xPos + offX, yPos + offY, "20px Arial", "white", textOffset, vOffset);
 		}
 	}
 }
