@@ -8,12 +8,13 @@ function drawCircle(x, y, r, c, options) {
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2 * Math.PI, false);
     ctx.fillStyle = c || 'red';
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = options.alpha || 1;
     if (options.glow)
     	ctx.shadowBlur = 100;
     if (options.glowColor)
 		ctx.shadowColor = options.glowColor || 'aqua';
-    ctx.fill();
+	if (options.fill || options.fill == undefined)
+    	ctx.fill();
     ctx.shadowBlur = 0;
     ctx.lineWidth = options.outlineWidth || 1;
     ctx.strokeStyle = options.outlineColor || 'black';
@@ -32,7 +33,7 @@ function drawRectangle(x, y, w, h, c, options) {
 	ctx.beginPath();
 	ctx.rect(0, 0, w, h);
 	ctx.fillStyle = c || 'grey';
-	ctx.globalAlpha = 1;
+	ctx.globalAlpha = options.alpha || 1;
 	if (options.fill == undefined || options.fill)
 		ctx.fill();
 	ctx.strokeStyle = options.outlineColor || "black";
@@ -43,18 +44,41 @@ function drawRectangle(x, y, w, h, c, options) {
 	ctx.restore();
 }
 
-function drawRect(x, y, w, h, d, c) {
+// Draw rectangle but centered
+function drawRect(x, y, w, h, d, c, options) {
+	if (!options)
+		options = {};
+
 	ctx.translate(x, y)
 	ctx.rotate(d);
 	ctx.beginPath();
 
 	ctx.rect(-w/2, -h/2, w, h);
 	ctx.fillStyle = c || 'grey';
+	ctx.globalAlpha = options.alpha || 1;
+		ctx.fill();
 	ctx.globalAlpha = 1;
-	ctx.fill();
 
 	ctx.closePath();
 	ctx.resetTransform();
+}
+
+function drawRoundedRect(x, y, w, h, r, c, options){
+	// Draw rounded rectangle
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.lineTo(x+w-r, y);
+    ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+    ctx.lineTo(x+w, y+h-r);
+    ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    ctx.lineTo(x+r, y+h);
+    ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+    ctx.lineTo(x, y+r);
+    ctx.quadraticCurveTo(x, y, x+r, y);
+    ctx.fillStyle = c || 'grey';
+	ctx.globalAlpha = options.alpha || 1;
+		ctx.fill();
+	ctx.globalAlpha = 1;
 }
 
 function drawImage(img, x, y, w, h, angle) {
@@ -71,23 +95,32 @@ function drawCircleImage(img, x, y, r, angle) {
 	ctx.resetTransform();
 }
 
-function drawLine(x1, y1, x2, y2, color, thickness) {
+function drawLine(x1, y1, x2, y2, color, thickness, cap, alpha) {
 	ctx.beginPath();
 	ctx.lineWidth = thickness;
 	ctx.moveTo(x1, y1);
 	ctx.lineTo(x2, y2);
+	ctx.globalAlpha = alpha || 1;
 	ctx.strokeStyle = color || "black";
+	ctx.lineCap = cap || "default";
 	ctx.stroke();
+	ctx.globalAlpha = 1;
 	ctx.closePath();
 }
 
-function drawText(text, x, y, font, color, align, baseline) {
+function drawText(text, x, y, font, color, align, baseline, alpha) {
+	let options = {};
+	if (font instanceof Object) {
+		options = font;
+	}
 	ctx.beginPath();
-	ctx.font = font || "20px Arial";
-	ctx.fillStyle = color || "red";
-	ctx.textAlign = align || "default";
-	ctx.textBaseline = baseline || "default";
+	ctx.font = options.font || font || "20px Arial";
+	ctx.fillStyle = options.color || color || "red";
+	ctx.textAlign = options.align || align || "default";
+	ctx.globalAlpha = alpha || 1;
+	ctx.textBaseline = options.baseline || baseline || "default";
 	ctx.fillText(text, x, y);
+	ctx.globalAlpha = 1;
 	ctx.closePath();
 }
 
@@ -134,6 +167,13 @@ function randn_bm() {
     while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
     while(v === 0) v = Math.random();
     return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+}
+
+function interpolate(a, b, frac) // points A and B, frac between 0 and 1
+{
+    var nx = a.x+(b.x-a.x)*frac;
+    var ny = a.y+(b.y-a.y)*frac;
+    return new Vector(nx, ny);
 }
 
 function dist(a, b) {

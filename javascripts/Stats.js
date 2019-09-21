@@ -18,6 +18,6 @@ class Stats {
 			text += round(this.value.reduce((a, b) => a + b, 0)/this.value.length, this.round);
 		}
 
-		drawText(text, 15, index*20+15, "20px Arial", "white", "left", "top");
+		drawText(text, display.viewPadding, index*20+display.viewPadding, "20px Arial", "white", "left", "top");
 	}
 }
