@@ -9,13 +9,14 @@ var advancedToggle = true;
 function drawInterface() {
 
 	// Interface
-	drawTitle(); // Draw the display title text
-	advancedKey(); // Display advanced rocket stats
-	drawClosestPlanetHUD(); // Draw the closest planet scale "?on the interface
-	drawClosestPlanetInfo(); // Draw the closest planet scale 
-	drawDashboard(); // Bottom-left indicators of vitals
-	drawMinimap(); // Draw the space map
-
+	if (display.toggleInterface) {
+		drawTitle(); // Draw the display title text
+		advancedKey(); // Display advanced rocket stats
+		drawClosestPlanetHUD(); // Draw the closest planet scale "?on the interface
+		drawClosestPlanetInfo(); // Draw the closest planet scale 
+		drawDashboard(); // Bottom-left indicators of vitals
+		drawMinimap(); // Draw the space map
+	}
 }
 
 // Draw the minimap to display surrounding planets
@@ -86,14 +87,14 @@ function drawMinimap() {
 		}
 	}
 
-	//Sort planet list by distance
+	// Sort planet list by distance
 	var sortedPlanetList = [];
 	var planetList = [].concat(planets);
 	for (var i = 0; i < 5; i++) {
 		var selectPlanet = undefined;
 		var distance = Infinity;
 		for (var j = 0; j < planetList.length; j++) {
-			if(dist(planetList[j].pos, rocket.pos) - planetList[j].radius - rocket.height/2 < distance) {
+			if(planetDist(rocket, planetList[j]) < distance) {
 				distance = dist(planetList[j].pos, rocket.pos) - planetList[j].radius - rocket.height/2;
 				selectPlanet = j;
 			}
@@ -103,36 +104,16 @@ function drawMinimap() {
 		planetList.splice(selectPlanet, 1);
 	}
 
-	//Display List
-	drawText("1. " + rocket.closestPlanet.name, 
-		canvas.width - HUDwidth - viewPadding + planetSize + HUDpadding*2,
-		canvas.height - viewPadding - HUDheight + HUDpadding, 
-		"16px Arial", "white", "left", "top"
-	);
-
-	drawText("2. " + sortedPlanetList[1].name, 
-		canvas.width - HUDwidth - viewPadding + planetSize + HUDpadding*2,
-		canvas.height - viewPadding - HUDheight + HUDpadding + labelSpacing, 
-		"16px Arial", "white", "left", "top"
-	);
-
-	drawText("3. " + sortedPlanetList[2].name, 
-		canvas.width - HUDwidth - viewPadding + planetSize + HUDpadding*2,
-		canvas.height - viewPadding - HUDheight + HUDpadding + labelSpacing * 2, 
-		"16px Arial", "white", "left", "top"
-	);
-
-	drawText("4. " + sortedPlanetList[3].name, 
-		canvas.width - HUDwidth - viewPadding + planetSize + HUDpadding*2,
-		canvas.height - viewPadding - HUDheight + HUDpadding + labelSpacing * 3, 
-		"16px Arial", "white", "left", "top"
-	);
-
-	drawText("5. " + sortedPlanetList[4].name, 
-		canvas.width - HUDwidth - viewPadding + planetSize + HUDpadding*2,
-		canvas.height - viewPadding - HUDheight + HUDpadding + labelSpacing * 4, 
-		"16px Arial", "white", "left", "top"
-	);
+	// Display List - OPTIMIZE FOR LATER
+	for (let i = 0; i < 5; i++) {
+		let distance = Math.max(0, round(planetDist(rocket, sortedPlanetList[i])));
+		drawText(
+			(i+1) + ". " + sortedPlanetList[i].name + " - " + (distance > 1000 ? round(distance / 1000, 2) + "km" : distance + "m"), 
+			canvas.width - HUDwidth - viewPadding + planetSize + HUDpadding*2,
+			canvas.height - viewPadding - HUDheight + HUDpadding + labelSpacing*i, 
+			"16px Arial", "white", "left", "top"
+		);
+	}
 }
 
 // Draw the advanced stats

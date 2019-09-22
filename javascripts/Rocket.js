@@ -70,13 +70,13 @@ class Rocket {
 		// Oxygen
 		this.maxOxygen = cfg.maxOxygen || 1000;
 		this.oxygen = this.maxOxygen;
-		this.oxygenConsumption = cfg.oxygenConsumption || 10;
+		this.oxygenConsumption = cfg.oxygenConsumption || 20;
 
 		// Mining
 		this.miningSpeed = cfg.miningSpeed || 0.01;
 	}
 
-	input() {
+	input() {	
 		// Respawn
 		if (keys[82]) {
 			if (this.crashed || this.fuel <= 0 || this.oxygen <= 0) {
@@ -85,7 +85,7 @@ class Rocket {
 		}
 
 		// Hold thrust
-		if(keys[45]) {
+		if(keys[45]) { // insert
 			if(this.thrustToggle === false) {
 				this.thrustToggle = true;
 				this.thrustSelect = !this.thrustSelect;
@@ -115,7 +115,7 @@ class Rocket {
 				// Thrust
 				if (keys[38] || keys[87]) {
 					this.thrust = Math.min(this.maxThrust, this.thrust + this.thrustSpeed * delta / 16);
-				} else if(keys[33]) { // Instant thrust?
+				} else if(keys[33]) { // Instant thrust? page down
 					this.thrust = 500;
 				} else if (keys[40] || keys[83]) { // Deceleration
 					if(!this.thrustSelect) {
@@ -193,7 +193,15 @@ class Rocket {
 			this.vel.normalize();
 			this.vel.mult(this.maxSpeed);
 		}
+ 
+		// New position
+		this.pos.add(Vector.mult(this.vel, delta/1000));
 
+		// Extra data
+		this.closestPlanetDistance = Math.max(0, this.getClosestPlanet(planets));
+	}
+
+	updateEssentials() {
 		// Update fuel
 		let newFuel = this.fuel - (Math.abs(this.thrust) + Math.abs(this.steer)*200) * delta / 1000 * this.fuelConsumption;
 		this.fuel = constrain(newFuel, 0, this.maxFuel);
@@ -209,12 +217,6 @@ class Rocket {
 			let newOxygen = this.oxygen + delta / 4;
 			this.oxygen = constrain(newOxygen, 0, this.maxOxygen);
 		}
- 
-		// New position
-		this.pos.add(Vector.mult(this.vel, delta/1000));
-
-		// Extra data
-		this.closestPlanetDistance = Math.max(0, this.getClosestPlanet(planets));
 	}
 
 	collision() {
@@ -258,22 +260,34 @@ class Rocket {
 					// Proper landing
 					this.fuel = constrain(this.fuel + delta * 10, 0, this.maxFuel);
 					this.angle = angle+Math.PI/2;
+					this.steer = 0;
 
 					// Mine resources
 					if (p.resource.amount > 0 && p.resource.type != "None") {
+						// Decrease resource on planet and increase resource gained from player
 						p.resource.amount = Math.max(
 							p.resource.amount-this.miningSpeed*delta, 
 							0
 						);
+
+						// Change planet properties
 						let lastRadius = p.radius;
 						p.radius = p.maxRadius * (p.resource.amount/p.resource.totalAmount);
 						p.mass = p.maxMass * (Math.pow(p.radius, 2)/Math.pow(p.maxRadius, 2));
-						p.color = pSBC(-(1-1*(p.resource.amount/p.resource.totalAmount)), p.maxColor, false, true)
-						p.strokeColor = pSBC(-(1-1*(p.resource.amount/p.resource.totalAmount)), p.maxStrokeColor, false, true)
+						p.color = pSBC(-(1-(p.resource.amount/p.resource.totalAmount)), p.maxColor, false, true)
+						p.strokeColor = pSBC(-(1-(p.resource.amount/p.resource.totalAmount)), p.maxStrokeColor, false, true)
 
+						// Destroy when planet becomes too small
 						if(p.mass < 1000) {
 							p.resource.amount = 0;
 						}
+
+						// Change player position to new planet radius
+						let deltaRadius = lastRadius-p.radius;
+						let deltaPos = new Vector(0, 1);
+						deltaPos = Vector.rotate(deltaPos, angle+Math.PI/2);
+						deltaPos.mult(deltaRadius);
+						this.pos.add(deltaPos);
 					}
 				}
 
@@ -281,7 +295,7 @@ class Rocket {
 				if(!this.welcome && !this.crashed) {
 					animateTitle(
 						"Welcome to " + p.name,
-						"You have landed, you can now relax and refuel.",
+						"You have landed, you can now mine and refuel.",
 						3000
 					);
 				}
@@ -328,6 +342,7 @@ class Rocket {
 
 		if (!this.crashed) {
 			this.move();
+			this.updateEssentials();
 			this.addParticles();
 			this.collision();
 		}
@@ -336,7 +351,7 @@ class Rocket {
 	addParticles() {
 		// Particles
 		if (this.thrust > 0) {
-			let maxParticles = 10;
+			let maxParticles = 1; // Change particles based on the FPS
 			let thrustRatio = this.thrust/this.maxThrust;
 
 			var thrusterPos = this.pos.copy();

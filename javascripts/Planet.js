@@ -18,8 +18,58 @@ class Planet {
 		this.maxStrokeColor = this.strokeColor;
 	}
 
-	update() {
-		
+	static generate() {
+		let massMultiplier = 1000; // How much the planet mass is multiplied by its radius
+    	let minSpawnDistance = 200; // How much the planets must be separated by
+
+    	// Determine the type of planet (planet, blackhole, asteroid)
+    	let seed = Math.random();
+    	let randRadius;
+    	if (seed < 90/100) {
+    		seed = "planet";
+    		randRadius = randInt(100, 300);
+    	} else if (seed < 98/100) {
+    		seed = "blackhole";
+    		randRadius = 75;
+    	} else {
+    		seed = "kanus maximus";
+    		randRadius = 1000;
+    	}
+	   
+	   	// Randomly generate position until it meets the criteria
+	   	let randX, randY
+	   	let generated = false;
+	   	while (!generated) {
+	   		// Creating new planets	 
+	    	randX = randInt(-map.width, map.width);
+	    	randY = randInt(-map.height, map.height);
+
+	    	let validPosition = true;
+
+	    	// Check for valid spawning location
+	    	for (let p of planets) {
+    			if (dist(new Vector(randX, randY), p.pos) < p.radius + randRadius + minSpawnDistance) {
+    				validPosition = false;
+    			}
+    		}
+
+    		if (validPosition)
+    			generated = true;
+	   	}
+	    	
+
+    	// Randomly create planets / black holes based on seed
+    	if(seed == "planet") {
+	    	// Create planets
+	    	return new Planet(randX, randY, randRadius * massMultiplier, randRadius, "Planet", new Resource(), planetNames[randInt(0, planetNames.length-1)], getRandomColor())
+
+    	} else if (seed == "blackhole") {
+    		// Create black hole
+	   		return new Planet(randX, randY, 5000000, 75, "Black Hole", new Resource("Singularium"), "Black Hole", "#000000", "black");
+    	} else if (seed = "kanus maximus") {
+    		// Create planets
+	    	return new Planet(randX, randY, 10000000, randRadius, "Planet", new Resource("Kanium"), "Kanus Maximus", getRandomColor());
+    	}	    
 	}
 
 	display() {

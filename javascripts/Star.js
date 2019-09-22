@@ -15,7 +15,9 @@ class Star {
 			var distance = Infinity;
 			var planetIndex = 0;
 
-			//Find closest planet to star
+			// Why is this not optimized USE 
+
+			// Find closest planet to star
 			for (var i = 0; i < planets.length; i++) {
 				if(planets[i].type == "Black Hole") {	
 					if(getDistance(planets[i].pos.x*zoom - rocket.pos.x*zoom + canvas.width/2,
@@ -31,12 +33,13 @@ class Star {
 				}
 			}
 
-			//Star is close to black hole
+			// Star is close to black hole
 			if(distance < 300*zoom) {
 				
 				let starRadian = Math.atan2((this.pos.y*zoom - rocket.pos.y*zoom / starDistance + canvas.height/2) - (planets[planetIndex].pos.y*zoom - rocket.pos.y*zoom + canvas.height/2), 
 					(this.pos.x*zoom - rocket.pos.x*zoom / starDistance + canvas.width/2) - (planets[planetIndex].pos.x*zoom - rocket.pos.x*zoom + canvas.width/2));
 
+				// Why the fuck is this not from helper
 				ctx.save();
 				ctx.beginPath();
 				ctx.lineCap = "round";
@@ -55,8 +58,6 @@ class Star {
 			} else {
 				ctx.save();
 				ctx.beginPath();
-				ctx.shadowColor = "white";
-				ctx.shadowBlur = 2*zoom;
 				drawCircle(
 					this.pos.x*zoom - rocket.pos.x*zoom / starDistance + canvas.width/2, 
 					this.pos.y*zoom - rocket.pos.y*zoom / starDistance + canvas.height/2, 

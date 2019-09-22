@@ -1,3 +1,26 @@
+function drawMenu() {
+	if (display.toggleMenu) {
+		// TITLE
+		let titleOptions = {
+			font: "100px Arial",
+			color: "white",
+			align: "center",
+			baseline: "middle"
+		}
+
+		drawText("INTERPLANETARY", canvas.width/2, canvas.height/3, titleOptions);
+
+		drawImage(images.wasd, canvas.width/2, canvas.height*3/4, canvas.width/8, canvas.width/16);
+		drawText("Hold up or W to add thrust", canvas.width/2, canvas.height*3/4+canvas.width/16, "20px Arial", "white")
+	}
+
+	// Toggle display
+	if (keys[38] || keys[87]) {
+		display.toggleInterface = true;
+		display.toggleMenu = false;
+	}
+}
+
 function drawStats() {
 	for (var i = 0; i < stats.length; i++) {
 		let stat = stats[i];

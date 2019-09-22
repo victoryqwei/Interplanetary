@@ -278,14 +278,6 @@ function getDistance( fromX, fromY, toX, toY ) {
 	return Math.sqrt( ( dX * dX ) + ( dY * dY ) );
 }
 
-// Get screen pos
-
-function getScreenPos(absolutePos, zoom) {
-	return new Vector(
-		absolutePos.x*zoom - rocket.pos.x*zoom + canvas.width/2, 
-		absolutePos.y*zoom - rocket.pos.y*zoom + canvas.height/2);
-}
-
 // Game loop helper
 
 class Loop {
