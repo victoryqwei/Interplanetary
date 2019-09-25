@@ -1,5 +1,5 @@
 class Planet {
-	constructor(x, y, mass, radius, type, resource, name = "Planet", color = "#c1440e", strokeColor) {
+	constructor(x, y, mass, radius, type, name = "Planet", color = "#c1440e", strokeColor) {
 		this.pos = new Vector(x, y);
 
 		this.mass = mass;
@@ -10,7 +10,15 @@ class Planet {
 
 		this.name = name;
 		this.type = type;
-		this.resource = resource;
+		if(name == "Earth") {
+			this.resource = new Resource("None");
+		} else if(name == "Black Hole"){
+			this.resource = new Resource("Singularium", this.radius*2);
+		} else if(name == "Kanus Maximus"){
+			this.resource = new Resource("Kanium", this.radius*2);
+		} else {
+			this.resource = new Resource(undefined, this.radius*2);
+		}
 		this.oxygen = true;	
 		this.color = color;
 		this.maxColor = color;
@@ -61,14 +69,14 @@ class Planet {
     	// Randomly create planets / black holes based on seed
     	if(seed == "planet") {
 	    	// Create planets
-	    	return new Planet(randX, randY, randRadius * massMultiplier, randRadius, "Planet", new Resource(), planetNames[randInt(0, planetNames.length-1)], getRandomColor())
+	    	return new Planet(randX, randY, randRadius * massMultiplier, randRadius, "Planet", planetNames[randInt(0, planetNames.length-1)], getRandomColor())
 
     	} else if (seed == "blackhole") {
     		// Create black hole
-	   		return new Planet(randX, randY, 5000000, 75, "Black Hole", new Resource("Singularium"), "Black Hole", "#000000", "black");
+	   		return new Planet(randX, randY, 5000000, 75, "Black Hole", "Black Hole", "#000000", "black");
     	} else if (seed = "kanus maximus") {
     		// Create planets
-	    	return new Planet(randX, randY, 10000000, randRadius, "Planet", new Resource("Kanium"), "Kanus Maximus", getRandomColor());
+	    	return new Planet(randX, randY, 10000000, randRadius, "Planet", "Kanus Maximus", getRandomColor());
     	}	    
 	}
 

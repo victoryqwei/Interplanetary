@@ -142,6 +142,23 @@ function drawArrow(x1, y1, x2, y2, thickness, color, alpha, cap){
     ctx.globalAlpha = 1;
 }
 
+ function drawTriangle(x, y, base, height, angle, color) {
+ 	ctx.translate(x, y)
+	ctx.rotate(angle);
+	ctx.beginPath();
+
+    var path =new Path2D();
+    path.moveTo(-base/2,height/2);
+    path.lineTo(0,-height/2);
+    path.lineTo(base/2,height/2);
+    ctx.fillStyle = color || "black";
+    ctx.fill(path);
+
+   	ctx.closePath();
+	ctx.resetTransform();
+}
+
+
 // Math functions
 
 function constrain(value, a, b) {
@@ -276,6 +293,23 @@ function getDistance( fromX, fromY, toX, toY ) {
 	var dY = Math.abs( fromY - toY );
 
 	return Math.sqrt( ( dX * dX ) + ( dY * dY ) );
+}
+
+function abbreviateNumber(value) {
+    var newValue = value;
+    if (value >= 1000) {
+        var suffixes = ["", "k", "m", "b","t"];
+        var suffixNum = Math.floor( (""+value).length/3 );
+        var shortValue = '';
+        for (var precision = 2; precision >= 1; precision--) {
+            shortValue = parseFloat( (suffixNum != 0 ? (value / Math.pow(1000,suffixNum) ) : value).toPrecision(precision));
+            var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
+            if (dotLessShortValue.length <= 2) { break; }
+        }
+        if (shortValue % 1 != 0)  shortValue = shortValue.toFixed(1);
+        newValue = shortValue+suffixes[suffixNum];
+    }
+    return newValue;
 }
 
 // Game loop helper

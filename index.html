@@ -34,12 +34,19 @@ Created by Victor Wei and Evan Cowan-->
 	<body oncontextmenu="return false;">
 		<canvas id="canvas"></canvas>
 
-		<div id="feedback-container">
-			<a id="feedback-link" href="https://discord.gg/wBFdUFd">Join our discord server to give suggestions and feedback!</a>
+		<div style="width: 100%; height: 10px; position: absolute; top: 50%; display: none; z-index: 1;" id="options-container">
+			<div class="slidecontainer" style="position: relative; margin-right:auto; margin-left: auto; float: center; width: 200px;">
+			  <input type="range" min="1" max="100" value="50" class="slider" id="interfaceScale" style="position: relative; float: center; width: 200px;">
+			</div>
 		</div>
-		<!-- <div id="feedback-container" style="text-align: left;">
+
+		<div id="feedback-container" style="text-align: left;">
 			<a id="feedback-link">Created by Victor Wei and Evan Cowan</a>
-		</div> -->
+		</div>
+		<div id="feedback-container">
+			<a id="feedback-link" target="_blank" href="https://discord.gg/uKYXPeA">Click here to join our discord server to give suggestions and feedback!</a>
+		</div>
+		
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="javascripts/helper.js"></script>
@@ -47,6 +54,7 @@ Created by Victor Wei and Evan Cowan-->
 		<script src="javascripts/perlin.js"></script>
 		<script src="javascripts/Rocket.js"></script>
 		<script src="javascripts/Planet.js"></script>
+		<script src="javascripts/Drill.js"></script>
 		<script src="javascripts/Resource.js"></script>
 		<script src="javascripts/Star.js"></script>
 		<script src="javascripts/Stats.js"></script>
@@ -66,7 +74,7 @@ Created by Victor Wei and Evan Cowan-->
 			canvas.width = $(document).innerWidth();
 			canvas.height = $(document).innerHeight();
 
-			noise.seed(Math.random()); // Random terrain
+			noise.seed(Math.random()); // Random terrain	
 
 			$(window).resize(function () {
 		        canvas.width = window.innerWidth;
@@ -87,6 +95,8 @@ Created by Victor Wei and Evan Cowan-->
 		    	toggleMenu: true,
 		    	toggleInterface: false,
 		    	advanced: false,
+		    	options: false,
+		    	interfaceScale: 1,
 		    	zoom: 1,
 		    	smoothZoom: [],
 		    	smooth: true,
@@ -97,6 +107,10 @@ Created by Victor Wei and Evan Cowan-->
 		    	HUDwidth: 400,
 		    	HUDheight: 190
 		    }
+
+		    // Setup options
+			var interfaceSlider = document.getElementById("interfaceScale");
+			interfaceSlider.value = display.interfaceScale * 50;
 
 		    // Map width
 		    var map = {
@@ -112,11 +126,13 @@ Created by Victor Wei and Evan Cowan-->
 			var smoke = new Image();
 			smoke.src = "https://www.blog.jonnycornwell.com/wp-content/uploads/2012/07/Smoke10.png";
 
+			var resourceTypes = ["Iron", "Copper", "Lead", "Kanium"];
+
 			var solarSystem = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"];
-			// We don't need this many planets
+			// Yes we do
 		    var planetNames = ["Onvoacury","Tephoatov","Thucurn","Yethiri","Seutera","Zeanope","Ziceter","Phipehines","Lladus XF","Cagua JBR","Xankehines","Zelnionerth","Polvore","Xunvichi","Azuno","Buinus","Diizuno","Llachogawa","Phorth OG1","Liuq EXB","Illoustea","Xellenides","Minkore","Melvagua","Miphus","Dotania","Seluruta","Bavalea","Groria FPVC","Soria 0OG","Xethiebos","Posaiyama","Nocrinda","Thaphade","Sigawa","Uiwei","Crukiruta","Sevuturn","Gruna 4L1","Goth M","Tegneivis","Ronkeostea","Mallarvis","Allypso","Theturn","Yielia","Thexazuno","Golunides","Zapus 2E3","Crara 2L","Chinkutune","Olnilea","Vozone","Lonroth","Baohiri","Vivis","Gnochoruta","Griezuno","Chade 7FD5","Bradus 2","Dinionope","Sinazuno","Gotrion","Idiea","Beutune","Lieter","Phaezuno","Brakuter","Chonoe 6010","Stroria 76","Zonkorilia","Zignaimia","Nebyke","Chenvade","Dealara","Puturn","Striaturn","Brepolea","Gillon 2BX","Cara 4L3","Chudiugawa","Cholelia","Gozinda","Xaleon","Zionides","Diewei","Lluniliv","Muoturn","Streon 4TV","Crara N08","Xugreter","Tubiegawa","Xudars","Gozars","Zaophus","Yuliv","Gechucarro","Dokecury","Geron VQ2","Cippe 7EWH","Aveclite","Yiphaimia","Alloth","Odade","Aitov","Alia","Crumonope","Phoustea","Phion WFW","Strion 2F0Q","Rethuiter","Thusaruta","Mucrinda","Adyria","Lonia","Havis","Drapiwei","Ciohiri","Llilia 3HVW","Gore PI","Chustretania","Nubbicarro","Guvillon","Yennoth","Xunides","Paophus","Broetis","Saroter","Brora 371","Sorix MHO","Zidropra","Zuthiwei","Xucroria","Ungarvis","Duarilia","Giter","Brovurilia","Muemia","Dolla T9","Phyke 88","Chunuetune","Kuluter","Bostrorth","Thondion","Ieter","Momia","Covurus","Layulara","Sypso 3VJD","Garvis 1ZX","Pigonus","Tenreuria","Yabbosie","Thicherth","Aelea","Thotov","Triraliv","Zachuliv","Brion KRS4","Thypso 9DG3","Hunruter","Chathiuruta","Kucippe","Sunzade","Sestea","Tethea","Bilalea","Llasolia","Colla 71Q","Churn TC","Xecratera","Pelnutov","Tebbars","Echion","Chehiri","Thiria","Simitera","Cretigawa","Drore PH1","Crora IRF","Xillounope","Thiphiuria","Kedreron","Megrorth","Xiotis","Pilara","Gnaalara","Lizanope","Byria R","Brilia 62K","Visunope","Podioria","Kanrilia","Chungeron","Cheatune","Eunus","Lloronides","Morania","Sonoe 70N","Nyke T59","Civuetis","Mibruzuno","Nagomia","Egrara","Atune","Leclite","Criitera","Lochuwei","Lerth YEH","Grara RJ4","Eviastea","Xagaustea","Zedriuq","Olmagua","Tivis","Chuzuno","Nosogantu","Diehines","Moria 8A","Zore 0277","Enduliv","Tennietov","Yalmilles","Echadus","Veawei","Zowei","Gnodoturn","Truparilia","Gragua C7","Chora 52N","Guziclite","Yonzarilia","Kasinda","Ruthyke","Laenope","Birus","Phetuhines","Milovis","Bides 9T3B","Grarth 80W","Tonoumia","Bundeonerth","Tondade","Punnapus","Xephus","Uanus","Crudupra","Briecury","Beon G2","Binda UZ0", "Rephecarro", "Sophebos", "Lulmaonerth", "Zastruelea", "Ocroalea", "Gisadus", "Pandomia", "Duthilles", "Xechinda", "Kealia", "Luilia", "Buicarro", "Drekatania", "Cruutis", "Ciea 8F6E", "Noth WC3T", "Drorth 2I", "Treron M1V9", "Theshan LIXD", "Crora C809", "Theon 592", "Mides A61T", "Wei's Planet", "Mayan 889", "Fryer P123", "Rossen B227"];
 
-			// Get screen pos - EXTREMELY HELPFUL FUNCTION THAT EVAN DOESN'T USE
+			// Get screen pos - ACTUALLY I DID USE THIS FUNCTION
 			function getScreenPos(absolutePos, zoom) {
 				return new Vector(
 					absolutePos.x*zoom - rocket.pos.x*zoom + canvas.width/2, 
@@ -126,11 +142,11 @@ Created by Victor Wei and Evan Cowan-->
 		    function setup() {
 
 		    	// Define rocket
-		    	rocket = new Rocket(0, 0, 23000, 10, 30);
+		    	rocket = new Rocket(0, 0, 23000, 10, 27);
 
 		    	let earthRadius = 200;
 		    	let massMultiplier = 1000;
-		    	planets = [new Planet(0, earthRadius+rocket.height/2, earthRadius * massMultiplier, earthRadius, "Planet", new Resource("None"), "Earth", "#0d7d93", "green")];	   
+		    	planets = [new Planet(0, earthRadius+rocket.height/2, earthRadius * massMultiplier, earthRadius, "Planet", "Earth", "#0d7d93", "green")];	   
 
 
 				for (var i = 0; i < 200; i++) {
@@ -156,9 +172,10 @@ Created by Victor Wei and Evan Cowan-->
 			    stats.push(new Stats("Angular Velocity", rocket, "angularVelocity", 2));
 			    stats.push(new Stats("Angle from Planet", rocket, "angleFromPlanet", 2));
 
-			    console.log("Interplanetary");
+			    console.log("Finished setting up assets");
 			    console.log("Created by Victor Wei and Evan Cowan");
-			    console.log("Credits to Kanus Maximus");
+			    console.log("#KM");
+			    console.log("Join our discord server to give suggestions or feedback (in-game perks included): https://discord.gg/wBFdUFd");
 		    }
 
 		    // Functions
@@ -178,6 +195,10 @@ Created by Victor Wei and Evan Cowan-->
 		    }
 
 			function update() {
+
+				// Update interface scale
+				display.interfaceScale = 0 + interfaceSlider.value / 50; 
+
 				rocket.update(); // Update rocket
 
 				updateZoom(rocket); // Update zoom based on rocket speed

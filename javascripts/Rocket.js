@@ -14,6 +14,8 @@ class Rocket {
 		this.angularVelocity = 0;
 		this.angleFromPlanet = 0;
 
+		this.drill = new Drill(1);
+
 		// Forces
 		this.thrust = 0;
 		this.steer = 0;
@@ -29,7 +31,7 @@ class Rocket {
 		this.closestPlanetDistance = 0;
 		this.closestPlanet = undefined;
 
-		this.resources = [];
+		this.resources = {Iron: 0, Copper: 0, Kanium: 0, Lead: 0};
 
 		let config = {
 			width: width,
@@ -50,7 +52,7 @@ class Rocket {
 	setConfig(cfg) {
 		if (!cfg) cfg = {};
 
-		this.height = cfg.height || 60;
+		this.height = cfg.height || 80;
 		this.width = cfg.width || 20;
 
 		this.maxSpeed = cfg.maxSpeed || Infinity;
@@ -78,14 +80,17 @@ class Rocket {
 
 	input() {	
 		// Respawn
-		if (keys[82]) {
+		if (keys[82]) { // R
 			if (this.crashed || this.fuel <= 0 || this.oxygen <= 0) {
 				this.respawn();
 			}
+
+			if (keys[16]) // Shift + R
+				this.respawn();
 		}
 
 		// Hold thrust
-		if(keys[45]) { // insert
+		if(keys[84]) { // insert
 			if(this.thrustToggle === false) {
 				this.thrustToggle = true;
 				this.thrustSelect = !this.thrustSelect;
@@ -119,7 +124,7 @@ class Rocket {
 					this.thrust = 500;
 				} else if (keys[40] || keys[83]) { // Deceleration
 					if(!this.thrustSelect) {
-						this.thrust = Math.max(-this.maxThrust/3, this.thrust - this.thrustSpeed * delta / 16)
+						this.thrust = Math.max(0, this.thrust - this.thrustSpeed * delta / 16)
 					}
 				} else {
 					if(this.thrustSelect) {
@@ -129,6 +134,10 @@ class Rocket {
 			} else {
 				this.thrust = 0;
 			}
+		}
+
+		if(this.thrst <= 0) {
+			this.thrust = 0;
 		}
 	}
 
@@ -269,6 +278,11 @@ class Rocket {
 							p.resource.amount-this.miningSpeed*delta, 
 							0
 						);
+						let resourceType = p.resource.type;
+						rocket.resources[resourceType] = Math.max(
+							rocket.resources[resourceType]+this.miningSpeed*delta, 
+							0
+						);
 
 						// Change planet properties
 						let lastRadius = p.radius;
@@ -276,11 +290,6 @@ class Rocket {
 						p.mass = p.maxMass * (Math.pow(p.radius, 2)/Math.pow(p.maxRadius, 2));
 						p.color = pSBC(-(1-(p.resource.amount/p.resource.totalAmount)), p.maxColor, false, true)
 						p.strokeColor = pSBC(-(1-(p.resource.amount/p.resource.totalAmount)), p.maxStrokeColor, false, true)
-
-						// Destroy when planet becomes too small
-						if(p.mass < 1000) {
-							p.resource.amount = 0;
-						}
 
 						// Change player position to new planet radius
 						let deltaRadius = lastRadius-p.radius;
@@ -298,12 +307,17 @@ class Rocket {
 						"You have landed, you can now mine and refuel.",
 						3000
 					);
-				}
+				}			
+			}
 
-				// When resources of the planet are depleted, destroy the planet
-				if(p.resource.amount == 0) {
-					planets.splice(i, 1);
-				}
+			// Destroy when planet becomes too small
+			if(p.mass < 10000) {
+				p.resource.amount = p.resource.amount-0.05*delta;
+			}
+
+			// When resources of the planet are depleted, destroy the planet
+			if(p.resource.amount <= 0) {
+				planets.splice(i, 1);
 			}
 		}
 
@@ -334,6 +348,10 @@ class Rocket {
 
 		for (var i = 0; i < planets.length; i++) {
 			planets[i].resource.amount = planets[i].resource.totalAmount;
+		}
+
+		for (var i = 0; i < resourceTypes.length; i++) {
+			rocket.resources[resourceTypes[i]] = 0;
 		}
 	}
 
@@ -481,6 +499,8 @@ class Rocket {
 	}
 
 	display() {
+
+		// Draw the rocket - WITH AN ACTUAL NOSE CONE AND WINDOW YOU LITTLE
 		let width = this.width * display.zoom;
 		let height = this.height * display.zoom;
 
@@ -490,6 +510,30 @@ class Rocket {
 		// Draw body
 		ctx.save();
 		drawRect(canvas.width/2, canvas.height/2, width, height, this.angle, "#d3d3d3")
+		ctx.restore();
+
+		var options = {
+			alpha: 1
+		}
+
+		// Draw nose cone
+		ctx.beginPath();
+		ctx.save();
+		ctx.translate(canvas.width/2, canvas.height/2);
+		ctx.rotate(this.angle);
+	    ctx.moveTo(-width/2, -height/2);
+	    ctx.lineTo(width/2, -height/2);
+	    ctx.lineTo(0, -23*display.zoom);
+	    ctx.fillStyle = "red";
+	    ctx.fill();
+	    ctx.restore();
+	    ctx.closePath();
+
+		// Draw rocket window
+		ctx.save();
+		ctx.translate(canvas.width/2, canvas.height/2);
+		ctx.rotate(this.angle);
+		drawRoundedRect(0-width/4, -width, width/2, width, 3*display.zoom, "rgb(70, 70, 70)", options)
 		ctx.restore();
 
 		// Draw thrusters

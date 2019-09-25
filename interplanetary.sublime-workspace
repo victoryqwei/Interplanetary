@@ -1,0 +1,1220 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"m",
+				"margin\tproperty"
+			],
+			[
+				"margin",
+				"margin-top\tproperty"
+			],
+			[
+				"update",
+				"updateEssentials"
+			],
+			[
+				"del",
+				"deltaPos"
+			],
+			[
+				"oxy",
+				"oxygen"
+			],
+			[
+				"valid",
+				"validPosition"
+			],
+			[
+				"closes",
+				"closestPlanetDistance"
+			],
+			[
+				"clo",
+				"closestPlanetDistance"
+			],
+			[
+				"add",
+				"addParticles"
+			],
+			[
+				"rocket",
+				"rocketHeading"
+			],
+			[
+				"view",
+				"viewPadding"
+			],
+			[
+				"text",
+				"textSpacing"
+			],
+			[
+				"d",
+				"descriptor"
+			],
+			[
+				"paddin",
+				"padding-bottom\tproperty"
+			],
+			[
+				"padding",
+				"padding-bottom\tproperty"
+			],
+			[
+				"font",
+				"font-family\tproperty"
+			],
+			[
+				"res",
+				"respawn"
+			],
+			[
+				"closest",
+				"closestPlanet"
+			],
+			[
+				"abs",
+				"absolutePos"
+			],
+			[
+				"maze",
+				"currentMaze"
+			],
+			[
+				"time",
+				"time_not_seen_player"
+			],
+			[
+				"an",
+				"angularVelocity"
+			],
+			[
+				"fire",
+				"fireDuration"
+			],
+			[
+				"thru",
+				"thrusterPos"
+			],
+			[
+				"smok",
+				"smokeParticle"
+			],
+			[
+				"lan",
+				"landingSpeed"
+			],
+			[
+				"ladn",
+				"landingSpeed"
+			],
+			[
+				"smoke",
+				"smokeOffset"
+			],
+			[
+				"par",
+				"particles"
+			],
+			[
+				"draw",
+				"drawParticles"
+			],
+			[
+				"part",
+				"particleDelay"
+			],
+			[
+				"displa",
+				"display"
+			],
+			[
+				"veloic",
+				"velocityDir"
+			],
+			[
+				"velocity",
+				"velocityDir"
+			],
+			[
+				"steer",
+				"steerSpeed"
+			],
+			[
+				"fuel",
+				"fuelConsumption"
+			],
+			[
+				"star",
+				"starDistance"
+			],
+			[
+				"round",
+				"roundValue"
+			],
+			[
+				"shadow",
+				"shadowBlur"
+			],
+			[
+				"stroke",
+				"strokeStyle"
+			],
+			[
+				"terrain",
+				"terrainMaxHeight"
+			],
+			[
+				"terra",
+				"terrainMaxHeight"
+			],
+			[
+				"local",
+				"localVelocity"
+			],
+			[
+				"car",
+				"carLength"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"susp",
+				"suspensionRear"
+			],
+			[
+				"cons",
+				"Constraint"
+			],
+			[
+				"random",
+				"randomMass"
+			],
+			[
+				"max",
+				"max-width\tproperty"
+			],
+			[
+				"mar",
+				"margin-top\tproperty"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"inline",
+				"inline-block\tdisplay"
+			],
+			[
+				"down",
+				"down-arrow"
+			],
+			[
+				"na",
+				"navigation-height"
+			],
+			[
+				"text-deco",
+				"text-decoration-color\tproperty"
+			],
+			[
+				"scroll",
+				"scroll-down"
+			],
+			[
+				"overflo",
+				"overflow-y\tproperty"
+			],
+			[
+				"overfl",
+				"overflow-x\tproperty"
+			],
+			[
+				"min",
+				"min-height\tproperty"
+			],
+			[
+				"came",
+				"camberAngle"
+			],
+			[
+				"distan",
+				"distanceTraveled"
+			],
+			[
+				"axl",
+				"axleWeightRear"
+			],
+			[
+				"axle",
+				"axleWeightFront"
+			],
+			[
+				"wtLat",
+				"wtLateral"
+			],
+			[
+				"bump",
+				"bumpHeight"
+			],
+			[
+				"RR",
+				"RL_RR2"
+			],
+			[
+				"CM",
+				"CM_Pos"
+			],
+			[
+				"apply",
+				"applyQuaternion"
+			],
+			[
+				"RL_FR",
+				"RL_FR2"
+			],
+			[
+				"RR_bod",
+				"RR_bodyRel"
+			],
+			[
+				"FR",
+				"FR_springLength"
+			],
+			[
+				"FL_",
+				"FL_springLength"
+			],
+			[
+				"RL",
+				"RL_springLength"
+			],
+			[
+				"stif",
+				"stiffnessFront"
+			],
+			[
+				"frontier",
+				"frontierRightWheelRoot"
+			],
+			[
+				"tra",
+				"trackWidth"
+			],
+			[
+				"wtLa",
+				"wtLateralRear"
+			],
+			[
+				"wtLater",
+				"wtLateralFront"
+			],
+			[
+				"slip",
+				"slipAngleBack"
+			],
+			[
+				"cgToRear",
+				"cgToRearAxle"
+			],
+			[
+				"cgToFron",
+				"cgToFrontAxle"
+			],
+			[
+				"Ve",
+				"Vector3"
+			],
+			[
+				"show",
+				"showDashboard"
+			],
+			[
+				"global",
+				"globalCompositeOperation"
+			],
+			[
+				"engin",
+				"engineRed"
+			],
+			[
+				"th",
+				"throttle"
+			],
+			[
+				"engine",
+				"engineAngular"
+			],
+			[
+				"angular",
+				"angularTorque"
+			],
+			[
+				"trac",
+				"tractionForce"
+			],
+			[
+				"brake",
+				"brakeTorque"
+			],
+			[
+				"tracti",
+				"tractionTorque"
+			],
+			[
+				"torque",
+				"torqueCurve"
+			],
+			[
+				"eng",
+				"engineForce"
+			],
+			[
+				"angul",
+				"angularSpeedRatio"
+			],
+			[
+				"gear",
+				"gearSelect"
+			],
+			[
+				"addPOint",
+				"addPoints"
+			],
+			[
+				"angu",
+				"angularSpeedRatio"
+			],
+			[
+				"wheelRotat",
+				"wheelRotationRate"
+			],
+			[
+				"interpo",
+				"interpolatedValue"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"x",
+				"x"
+			],
+			[
+				"camera",
+				"cameraTarget"
+			],
+			[
+				"Or",
+				"OrbitControls"
+			],
+			[
+				"no",
+				"noopener"
+			],
+			[
+				"ste",
+				"steering"
+			],
+			[
+				"wheel",
+				"wheelOrientation"
+			],
+			[
+				"ro",
+				"rotation"
+			],
+			[
+				"stats",
+				"statsSlider"
+			],
+			[
+				"ster",
+				"steerLeftPosition"
+			],
+			[
+				"id",
+				"idlePosition"
+			],
+			[
+				"stat",
+				"statsCounter"
+			],
+			[
+				"cgTo",
+				"cgToRear"
+			],
+			[
+				"vel",
+				"velocity"
+			],
+			[
+				"sidesl",
+				"sideslipAngle"
+			],
+			[
+				"corner",
+				"corneringForce"
+			],
+			[
+				"st",
+				"steeringAngle"
+			],
+			[
+				"cg",
+				"cgToRearAxle"
+			],
+			[
+				"frict",
+				"frictionForceRear"
+			],
+			[
+				"fric",
+				"frictionForceFront"
+			],
+			[
+				"ax",
+				"axleWeightFront"
+			],
+			[
+				"fri",
+				"frictionForceRear"
+			],
+			[
+				"spl",
+				"slipAngle"
+			],
+			[
+				"tire",
+				"tireGripRear"
+			],
+			[
+				"roll",
+				"rollingResistanceForce"
+			],
+			[
+				"net",
+				"netLongitudinalForce"
+			],
+			[
+				"c",
+				"cornerStiffnessFront"
+			],
+			[
+				"cgToFr",
+				"cgToFrontAxle"
+			],
+			[
+				"friction",
+				"frictionForceFront"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 11525,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "javascripts/interface.js",
+			"settings":
+			{
+				"buffer_size": 19855,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "javascripts/draw.js",
+			"settings":
+			{
+				"buffer_size": 1357,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "javascripts/Rocket.js",
+			"settings":
+			{
+				"buffer_size": 14917,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "javascripts/Planet.js",
+			"settings":
+			{
+				"buffer_size": 6377,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "javascripts/Star.js",
+			"settings":
+			{
+				"buffer_size": 2506,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "javascripts/Stats.js",
+			"settings":
+			{
+				"buffer_size": 648,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 428.0
+	},
+	"console":
+	{
+		"height": 137.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/undef/floobits/personal/public/projects/space",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts"
+	],
+	"file_history":
+	[
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/interface.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/Rocket.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/quadtree.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/Maze-Runner/javascripts/main.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/Planet.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/Resource.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/Stats.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/Star.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/draw.js",
+		"/C/Users/undef/floobits/personal/public/projects/space/javascripts/helper.js",
+		"/C/Users/undef/floobits/block/public/javascripts/events.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/pathfinder.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/maze_generation.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/game.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/main.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/index.html",
+		"/C/Users/undef/floobits/block/public/javascripts/player.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/matrix.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/pathfinder.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/main.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/game.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/ga.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/nn.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/matrix.js",
+		"/S/cloudyfiles/dev/public/projects/path/code.html",
+		"/C/Users/undef/floobits/personal/public/projects/maze/index.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/maze_generation.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/javascripts/util.js",
+		"/S/cloudyfiles/dev/public/projects/car-sim/vector.js",
+		"/S/cloudyfiles/dev/public/projects/2048/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/maze/construction_workspace.js",
+		"/C/Users/undef/floobits/personal/public/projects/flappybird/nn.js",
+		"/C/Users/undef/floobits/personal/public/projects/flappybird/ga.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/legacy/v1/javascripts/howler.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-sim/javascripts/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-sim/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/autonomous/index.html",
+		"/C/Users/undef/floobits/block/public/javascripts/draw.js",
+		"/C/Users/undef/floobits/block/public/javascripts/input.js",
+		"/C/Users/undef/floobits/block/public/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/graviton/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/earth/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/earth/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/bow/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/bow/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/bow/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/car-sim/javascripts/car.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-sim/javascripts/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/pi-dots/javascripts/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/pi-dots/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/pi-collision/javascripts/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/pi-collision/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/pi-dots/style.css",
+		"/C/Users/undef/floobits/personal/public/projects/pi-collision/javascripts/car.js",
+		"/C/Users/undef/floobits/personal/public/projects/hillclimb/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/hillclimb/javascripts/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/hillclimb/javascripts/Car.js",
+		"/C/Users/undef/floobits/personal/public/projects/collision/javascripts/draw.js",
+		"/C/Users/undef/floobits/personal/public/projects/collision/javascripts/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/collision/javascripts/car.js",
+		"/C/Users/undef/floobits/personal/public/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/angrybird/objects.js",
+		"/C/Users/undef/floobits/personal/public/projects/angrybird/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/hill/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/hill/objects.js",
+		"/C/Users/undef/floobits/personal/public/projects/hill/index.html",
+		"/C/Users/undef/floobits/block/public/javascripts/vector.js",
+		"/C/Users/undef/floobits/personal/app.js",
+		"/C/Users/undef/floobits/personal/public/projects/angrybird/functions.js",
+		"/C/Users/undef/floobits/personal/public/projects/hill/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/hill/matter.js",
+		"/C/Users/undef/floobits/personal/public/projects/hill/functions.js",
+		"/C/Users/undef/floobits/personal/public/title-boids/index.html",
+		"/C/Users/undef/floobits/personal/public/contact.html",
+		"/S/nginx/conf/nginx.conf",
+		"/C/Users/undef/floobits/personal/public/projects.html",
+		"/C/Users/undef/floobits/personal/public/about.html",
+		"/C/Users/undef/floobits/personal/public/home.html",
+		"/C/Users/undef/floobits/personal/public/css/extra.css",
+		"/C/Users/undef/floobits/personal/public/css/projects.css",
+		"/C/Users/undef/floobits/personal/public/css/about.css",
+		"/C/Users/undef/floobits/personal/public/css/home.css",
+		"/C/Users/undef/floobits/personal/public/css/style.css",
+		"/C/Users/undef/floobits/personal/public/title-boids/functions.js",
+		"/C/Users/undef/floobits/personal/public/title-boids/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/misc/Car.js",
+		"/C/Users/undef/floobits/personal/public/projects/autonomous/functions.js",
+		"/C/Users/undef/floobits/personal/public/projects/2048/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/2048/2048.js",
+		"/C/Users/undef/floobits/personal/public/projects/car/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/sort/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/javascripts/input.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/javascripts/graph.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/default.css",
+		"/C/Users/undef/floobits/personal/public/projects/three/textures.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/javascripts/helper.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/javascripts/speedometer.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/javascripts/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/three/index.html",
+		"/C/Users/undef/floobits/personal/public/projects/three/core.js",
+		"/C/Users/undef/floobits/personal/public/projects/three/chunkLoader.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/javascripts/perlin.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/math/perlin.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/math/ImprovedNoise.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/main.css",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/legacy/v1/jsm/misc/Car.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/legacy/v1/jsm/misc/OGControls.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/car.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/vector.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/loaders/DRACOLoader.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/build/three.module.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/input.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/graph.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/howler.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/audio/engine.wav",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/build/pointerlock.module.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/build/orbitcontrols.module.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/misc/OGControls.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/misc/CarControls.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/pmrem/PMREMGenerator.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/pmrem/PMREMCubeUVPacker.js",
+		"/C/Users/undef/floobits/personal/public/projects/car-3d/jsm/loaders/GLTFLoader.js"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 102.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"canvas.width",
+			"40",
+			" : ",
+			" color : white;",
+			"#000",
+			"(round(planetDist(rocket, sortedPlanetList[i]))",
+			"t[0]",
+			"0",
+			"4",
+			"this.color",
+			"planetSeed",
+			"let ",
+			"30",
+			"15",
+			"viewPadding",
+			"display.advanced",
+			"map",
+			"input",
+			"map",
+			"BAD",
+			"this.oxygen",
+			".fuel",
+			"newFuel",
+			"in",
+			"this",
+			"this.",
+			"this.width",
+			"let",
+			"dth/2",
+			"/2",
+			"/(2)",
+			"1.5",
+			" - planetRadius",
+			"7",
+			"/2",
+			"thrusterPos",
+			"pos.",
+			"100",
+			"\"20px Arial\", \"white\", \"center\", \"middle\"",
+			"options",
+			"color",
+			" \"80px Arial\", \"white\", \"center\", \"middle\"",
+			"text",
+			"6",
+			"8",
+			"drawTitle",
+			"Welcome",
+			"drawSpace",
+			"crashed",
+			"Create",
+			"10px",
+			"viewPadding,",
+			", \"left\", \"left\"",
+			" + planetRadius",
+			"\"center\"",
+			"\"middle\"",
+			"#e0982b",
+			"fuel",
+			"maxFuel",
+			"prevPos",
+			"rocket",
+			"this",
+			"planets[i]",
+			".closestPlanets",
+			"closestPlanet(",
+			"closestPlanet",
+			"this.pos.y*zoom",
+			"this.pos.x*zoom",
+			"uffer",
+			"i",
+			"$(document).innerHeight()",
+			"$(document).innerWidth()",
+			"gr",
+			"g",
+			"var ",
+			"var",
+			"20",
+			"player",
+			"src=\"",
+			"javascripts/",
+			"src=\"",
+			"10",
+			"closed",
+			"open",
+			"player",
+			"queue",
+			".val",
+			"y",
+			"x",
+			"nextNode",
+			"6",
+			"5",
+			"6",
+			"10",
+			"drawFinished",
+			"random(-fireOffset, fireOffset)",
+			"5",
+			"10",
+			"smoke",
+			"100",
+			"smoke",
+			" r ",
+			" r",
+			"r",
+			"inScreen",
+			"rect.rotation",
+			"circle.y",
+			"circle.x",
+			"rect.x",
+			"/2",
+			"rect.x",
+			"circle.x",
+			"circle.r",
+			"rect.h",
+			"rect.w",
+			"10",
+			"*zoom",
+			"imageObj",
+			"16",
+			"32",
+			"*display.zoom",
+			"rocketPos",
+			"zoom",
+			"this",
+			"this.context",
+			"this.image",
+			"gForce",
+			"200"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"closed_li",
+			"open_li"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "C:\\Users\\undef\\floobits\\personal\\public\\projects\\space"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11525,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8396,
+								8396
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "javascripts/interface.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19855,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4343,
+								4343
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1287.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "javascripts/draw.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "javascripts/Rocket.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13755,
+								13755
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3822.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "javascripts/Planet.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6377,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "javascripts/Star.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2506,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "javascripts/Stats.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 648,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 45.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.684073860358,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 495.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 187.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 3
+	}
+}
